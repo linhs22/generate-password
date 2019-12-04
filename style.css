@@ -46,3 +46,13 @@ button {
 #copy {
     background-color: gray;
 }
+
+@media screen and (max-width: 540px) {
+    body {
+      height: auto;
+      max-width: 80%;
+      text-align: center;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+ }
