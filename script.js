@@ -7,7 +7,6 @@ var copyBtn = document.querySelector("#copy");
 //this function will fire when you click the generate password button on the page.  I've set it to alert "You've clicked a button" and return a password of password for now. Update it to make your password
 function generatePassword() {
     //YOUR CODE HERE
-    alert("I've been clicked");
 
     var special = "!#$%&*+-:;<=>?@";
     var numbers = "0123456789";
@@ -17,6 +16,12 @@ function generatePassword() {
 
 
     var passLength = parseInt(prompt("How long do you want your password? Length (must be between 8 and 128 characters)"));
+
+    if (passLength < 8 || passLength > 128) {
+        alert("Password length invalid. Enter valid character length")
+        generatePassword()
+    }
+
     var specialChar = confirm("Do you want to include special characters");
     var numericChar = confirm("Do you want numeric characters?");
     var lowerChar = confirm("Do you want lowercase characters?");
@@ -33,6 +38,9 @@ function generatePassword() {
             password +=uppercase.charAt(Math.floor(Math.random()*uppercase.length));
             i++
         } if (upperChar === true && i <= passLength) {
+            password +=lowercase.charAt(Math.floor(Math.random()*lowercase.length));
+            i++
+        } if (specialChar === false && numericChar === false && lowerChar === false && upperChar === false ) {
             password +=lowercase.charAt(Math.floor(Math.random()*lowercase.length));
             i++
         }
@@ -60,14 +68,14 @@ function writePassword() {
 
 function copyToClipboard() {
     // BONUS 
-    var copyText = document.querySelector("#password");
+    var copyText = document.getElementById("password");
 
     /* Select the text field */
     copyText.select();
-    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+    // copyText.setSelectionRange(0, 99999); /*For mobile devices*/
   
     /* Copy the text inside the text field */
-    document.execCommand("#copy");
+    document.execCommand("copy");
   
     /* Alert the copied text */
     alert("Copied the text: " + copyText.value);
